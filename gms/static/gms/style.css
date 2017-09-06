@@ -1,0 +1,60 @@
+body{
+	background :white url("images/bg.jpg");
+}
+table, td { 
+		background: rgba(255,255,255,0.5); 
+		table-layout: auto;  
+	    border: 1px solid #ddd;
+	    text-align: center;
+}
+
+div.login {
+    width:1200px;
+    margin: auto;
+    /*bottom-border: 1px solid #73AD21;*/
+}
+
+th {  
+	table-layout: auto;  
+    border: 2px solid #ddd;
+    text-align: center;
+    padding: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+	    padding: 5px;
+	}
+label{
+	width: 120px;
+}
+input{
+	width: 120px;
+}
+
+.alert {
+	text-align: center;
+	width: 50%;
+    padding: 16px;
+    background-color: #f44336;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}

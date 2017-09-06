@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- <meta charset="UTF-8"> -->
+	<title>{{course1}}</title>
+</head>
+<body>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"> </script>
+	<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="{% static 'gms/style.css' %}"/>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/authenticated/">Home</a>
+		</div>
+
+		<!--items-->
+		<div class="collapse navbar-collapse" id="topNavBar">
+			<ul class="nav navbar-nav">
+				{% for courses in faculty.courses_set.all %}
+				{%if forloop.counter == course_no%}
+				<li class="active">
+				{%else%}
+				<li class="">
+				{%endif%}
+					<a href="/authenticated/{{forloop.counter}}">{{courses.course_name}}</a>
+				
+				</li>
+				{%  endfor %}
+
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="">
+					<a href='/authenticated/{{course_no}}/addexam'>
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
+						Add Exam
+					</a>
+				</li>
+				<li class="">
+					<a href="/authenticated/{{course_no}}/setcriteria">
+						Set Criteria
+					</a>
+				</li>
+				<li class="">
+					<a href="/logout/">
+						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
+						Log Out
+					</a>
+				</li>
+			</ul>
+		</div>
+		</div>
+	</nav>
+{%if total != 100%}
+	<div  style="margin: auto; background-color:yellow; color:red;" class="alert">
+	  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times</span> 
+	  <strong>Warning!</strong> Total sum of weightage of all exams is {{total}}% and should be 100%<br>
+	  Click on exam name to manage weightage or add new exam.
+	</div>
+{%endif%}
+<p fontcolor style="text-align: center; color: blue;" id="demo"></p>
+<br>
+<div style="width:70%; margin:0 auto;">
+	<form action="/authenticated/{{course_no}}/" method="POST" id="updatemarks_form">
+		{% csrf_token %}
+		<h3 style="text-align: center;"> Grade Management System </h3>
+		<hr >
+		<h4 style="text-align: center;"> {{course1}} Marks: </h4>
+		<div style=" overflow-x: auto;">
+			<table>
+				<tr style="background:#cce6ff">
+					<th>STUDENTS</th>
+					{%for exam in course1.exam_set.all%}
+						<th><a href='/authenticated/{{course_no}}/{{exam.id}}'> {{exam.name}}</a>  [ MM:{{exam.total_marks}} , {{exam.weightage}}%]</th>
+					{%endfor%}
+					<th>Weighted Sum &nbsp( out of {{total}} )</th>
+				</tr>
+
+				{%for student in course1.students.all%}
+				   	<tr>
+				   		<td><label>{{student}}</label></td>
+				   		
+					    {%for exam in course1.exam_set.all%}
+					        <td>
+					        	{% for r in result %}
+					        		{% if r.exam == exam and r.student == student %}
+				        				{% with marks=r.gained_marks %}
+										    <input style="text-align: center;" value="{{marks}}" type="number" name="{{student}}_{{exam}}" min="0" max="{{exam.total_marks}}" required>
+										{% endwith %}
+					        		{% endif %}
+					        	{% endfor %}
+					       	</td>
+					    {%endfor%}
+					    {%for total_marks in student.total_marks_set.all%}
+					    	{% if total_marks.course == course1 %}
+					    		<td><label>{{total_marks.total_marks}}</label></td>    
+					    	{% endif %}
+					    {%endfor%}
+				    </tr>
+			    {%endfor%}
+			</table>
+		</div>
+		<button class="btn btn-primary" type="submit" onclick="myFunction()" style="float: right;width: 100px;" >  Save  </button>
+		<a href="/authenticated/" style="float: left;"  class="btn btn-primary">Back to Home</a>
+	</form>
+	<script>
+	function myFunction() {
+	    if (confirm("Do you want to save marks ?") == true) {
+	        document.getElementById("demo").innerHTML = "Changes Saved Successfully!";
+	    }
+	}
+	</script>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+body{
+	background :white url("images/bg.jpg");
+}
+form{
+	background: rgba(255,255,255,0.1); 
+}
+label{
+	width: 175px;
+}
+input{
+	width: 120px;
+}

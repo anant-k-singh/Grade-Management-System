@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>{%block title%}Jarvis{%endblock%}</title>
+	{%load staticfiles%}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="{% static 'gms/style.css' %}"/>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		<!--Header-->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="{%url 'music:index'%}">Jarvis</a>
+		</div>
+
+		<!--items-->
+		<div class="collapse navbar-collapse" id="topNavBar">
+			<ul class="nav navbar-nav">
+				{%%}
+				<li class="active">
+					<a href="{%url 'music:index'%}">
+						Albums
+					</a>
+				</li>
+				<li class="">
+					<a href="{%url 'music:index'%}">
+						<span class="glyphicon glyphicon-music" aria-hidden="true"></span>&nbsp;
+						Songs
+					</a>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="">
+					<a href="{%url 'music:index'%}">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
+						Add Album
+					</a>
+				</li>
+				<li class="">
+					<a href="{%url 'music:index'%}">
+						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
+						LogOut
+					</a>
+				</li>
+			</ul>
+		</div>
+		</div>
+	</nav>
+	{%block body%}
+	{%endblock%}
+</body>
+</html>

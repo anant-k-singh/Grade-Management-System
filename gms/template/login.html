@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Grade Management System Login
+	</title>
+</head>
+<body>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'gms/style.css' %}"/>
+	
+	<div class="login">
+		<hr>
+		<img src="{% static 'gms/images/logo.png' %}"  style="float:left;">
+		<h2 style="text-align: right;"><font color="darkred">Indian Institute of Technology Jodhpur</font></h2>	
+		<h5 style="text-align: right;">Office of Academics, Old Residency Road, Ratanada</h5>
+		<h5 style="text-align: right;">Jodhpur 342011</h5>
+		<h5 style="text-align: right;">eMail: office_academics@iitj.ac.in, Phone: (91 291)2449002</h5>
+		<h2 style="text-align: center;">Grade Management System</h1>
+		<hr>
+	</div>
+	{% if error %}
+		<h4 style="color:#FF0000;text-align: center;">Invalid Credentials</h4>
+	{% endif %}
+	<!-- <div class="container" style="width:20%; margin-top:60px;">
+	<form action="/login/" method="post">	
+			{% csrf_token %}
+			<div class="input-group ">
+		      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		      <span> &nbsp   </span>
+		      <input id="username" name="user_name" type="text" placeholder="Username" required>
+		    </div>
+		    <div class="input-group">
+		      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		      <span> &nbsp   </span>
+		      <input id="pwd" name="password" type="password" placeholder="Password" required>
+		    </div>
+			<label style="width: 50px">Role:</label>
+			<select name="role" class="select" style="width:40%;">
+			 	<option value="student">Student</option>
+			 	<option value="faculty">Faculty</option>
+			 	<option value="admin">Admin</option>
+			</select><br>
+			<button class="btn btn-primary" type="submit" style="float: center;width: 100px;" >  Login  </button>
+		  	
+		</form>
+	</div> -->
+
+	
+    <div class="container">    
+    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        <div class="panel panel-info" >
+                <div class="panel-heading" style="background:rgb(1,1,1);">
+                    <div style="margin: 0 auto; color:rgb(255,255,255); ">LOGIN</div>
+                </div>     
+
+                <div style="padding-top:30px; " class="panel-body" >
+
+                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                        
+                    <form action="/login/" method="post" id="loginform" class="form-horizontal" role="form">
+                        {% csrf_token %}
+                        <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input id="username" name="user_name" type="text" placeholder="Username"  class="form-control" required>                       
+                        </div>
+                            
+                        <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input id="pwd" name="password" type="password" placeholder="Password" class="form-control" required>
+                                </div>
+                        <select name="role" class="form-control" style="width:40%;">
+						 	<option value="student">Student</option>
+						 	<option value="faculty">Faculty</option>
+						 	<option value="admin">Admin</option>
+						</select><br>
+
+                            <div style="margin-top:10px;" class="form-group">
+                               
+                                <div class="col-sm-12 controls">
+                                	<button class="btn btn-primary" type="submit" style="width: 100px;background-color:black;" >  Login  </button>
+                                </div>
+                            </div>   
+                        </form>     
+                    </div>                     
+                </div>  
+        </div> 
+    </div>
+    
+</body>
+</html>

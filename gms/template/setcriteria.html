@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Set Criteria</title>
+	{%load staticfiles%}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"> </script>
+	<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="{% static 'gms/style_setcriteria.css' %}"/>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		<!--Header-->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/authenticated/">Home</a>
+		</div>
+
+		<!--items-->
+		<div class="collapse navbar-collapse" id="topNavBar">
+			<ul class="nav navbar-nav">
+				<li class="active">
+					<a href="/authenticated/{{course_no}}">{{course.course_name}}</a>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="">
+					<a href="/logout/">
+						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
+						LogOut
+					</a>
+				</li>
+			</ul>
+		</div>
+		</div>
+	</nav>
+	<h3 style="text-align: center;">Enter the lower limit for individual grades for the course {{course}}</h3>
+	<hr>
+	<div style="width:300px; margin:0 auto;">
+		{% if error %}
+			<p style="color:red; text-align: center;">Minimum criteria marks should be decreasing order! </p>
+		{% endif %}
+		<form action="/authenticated/{{course_no}}/setcriteria/" method="post">	
+			{% csrf_token %}
+			<label>Lower limit for A grade</label>
+		    <input type="number" id="grade_a" name="grade_a" value="{{course.a}}" min="{{course.b}}" max="99" required><br>
+		    <label>Lower limit for B grade</label>
+		    <input type="number" id="grade_b" name="grade_b" value="{{course.b}}" min="{{course.c}}" max="{{course.a}}" required><br>
+		    <label>Lower limit for C grade</label>
+		    <input type="number" id="grade_c" name="grade_c" value="{{course.c}}" min="{{course.d}}" max="{{course.b}}" required><br>
+		    <label>Lower limit for D grade</label>
+		    <input type="number" id="grade_d" name="grade_d" value="{{course.d}}" min="0" max="{{course.c}}" required><br>
+			
+		  	<button class="btn btn-primary" type="submit" style="float: right;width: 100px;" >  Save  </button>
+		  	
+		</form>
+		<a href="/authenticated/{{course_no}}" style="float: left;"  class="btn btn-primary">Go Back</a>
+	</div>
+</body>
+</html>

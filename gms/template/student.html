@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Logged In
+	</title>
+	
+</head>
+<body>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'gms/style.css' %}"/>
+	<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="{% static 'gms/style.css' %}"/>
+
+	<a href="/logout/">
+   		<button class="btn btn-primary"  style="float: right;width: 100px;" >  Log Out  </button>
+	</a>
+	<h4 style="text-align: left;">Welcome {{student.first_name}}</h4>
+	<hr style="background-color: #000000; height: 2px;">
+	<h3 style="text-align: center;"> Result for Semester IV</h3>
+	<hr style="background-color: #000000; height: 2px;">
+	<div style="margin-top: 50px; width:50%; margin:0 auto;">
+	{%if pr is True%}
+		<table>
+			<tr style="background:#cce6ff">
+				<th><h4><strong>Courses</strong></h4></th>
+				<th><h4><strong>Credits ({{credits}})</strong></h4></th>
+				<th><h4><strong>Grade</strong></h4></th>
+				<th><h4><strong>Result</strong></h4></th>
+			</tr>
+
+			
+			{%for course in courses %}
+				{%for grade in grade_arr %}
+					{%if forloop.counter == forloop.parentloop.counter %}
+					   	<tr>
+					   		<td><label>{{course.course_name}}</label></td>
+					   		<td><label>{{course.credit}}</label></td>
+					   		<td><label>
+					   			{%if grade == 10%}
+					   			A
+					   			{%elif grade == 8%}
+					   			B
+					   			{%elif grade == 6%}
+					   			C
+					   			{%elif grade == 4%}
+					   			D
+					   			{%elif grade == 0%}
+					   			F
+					   			{%endif%}
+					   			</label></td>
+					   		<td><label>
+					   			{% if grade > 0 %}
+					   				Pass
+					   			{% else %}
+					   				<font color="red">Fail</font>
+					   			{%endif%}
+					   		</label></td>
+					    </tr>
+					{%endif%}
+			    {%endfor%}
+		    {%endfor%}
+		    <tr>
+		   		<td><h4><strong>SGPA</strong></h4><h5>(Semester Grade Point Average)</h5></td>
+		   		<td><h4></h4></td>
+		   		<td><h4><strong>{{sgpa}}</strong></h4></td>
+		   		<td></td>
+		    </tr>
+		</table>
+
+	{%endif%}
+	{%if pr is False%}
+		<h4 style="text-align: center;">Result is not published yet</h4>
+	{%endif%}
+	</div>
+	<br>
+	
+	
+</body>
+</html>
